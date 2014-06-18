@@ -5,6 +5,7 @@ EmpApp::Application.routes.draw do
     collection do
       get "search"
       get "sort"
+      get "group"
       post "soft_delete"
       get "soft_delete"
     end

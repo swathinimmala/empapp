@@ -1,0 +1,20 @@
+<%= form_tag(group_employees_path, method: "get") do %>
+  <%= select_tag "criterion", options_for_select(option_generator), prompt: "choose"%>
+  <%= submit_tag "submit"%>
+<% end %>
+
+<% unless @results.nil? %>
+  Group by <%= params["criterion"]%>
+  <table class="table">
+  	<tr>
+  	  <th><%= params["criterion"]%></th>
+  	  <th>Names</th>
+  	</tr>
+  	<% @results.each do |result|%>
+  	  <tr>
+        <td><%= result[:criterion] %></td>
+        <td><%= result[:names]%> </td>
+      </tr>
+  	<%end %>
+  </table>
+<% end %>

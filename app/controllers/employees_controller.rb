@@ -19,8 +19,19 @@ class EmployeesController < ApplicationController
   end
 
   def sort
-  	if params["operation"].present? && params["criterion"].present?
-  	  @employees = Employee.send(params["operation"], params["criterion"])
+  	if params["criterion"].present?
+  	  @employees = Employee.order(params["criterion"])
+    end
+  end
+
+  def group
+    if params["criterion"].present? 
+      @results = []
+      employees = Employee.all
+      employees = employees.group_by(&(params["criterion"].to_sym))
+      employees.each do |criterion, records|
+        @results << {:names => records.collect(&:name), :criterion => criterion}
+      end
   	end
   end
 end
