@@ -1,5 +1,5 @@
 class Employee < ActiveRecord::Base
-  attr_accessible :name, :email_id, :department, :designation, :location
+  attr_accessible :name, :email_id, :department, :designation, :location, :age
 
   # default scope for selecting active employees
   default_scope where(soft_deleted_at: nil)
