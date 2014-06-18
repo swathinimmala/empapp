@@ -1,0 +1,11 @@
+
+<div class="panel-heading">Search</div>
+<%= form_tag(search_employees_path, method: 'get') do %>
+  <%= text_field_tag :search_word %>
+  <%= submit_tag "submit"%>
+<% end %>
+
+<% unless @employees.empty? %>
+  Search results for "<%= params["search_word"]%>"
+  <%= render "employees", :employees => @employees%>
+<% end %>

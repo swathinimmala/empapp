@@ -1,0 +1,18 @@
+<table class="table">
+  <tr>
+  	<th>Name</th>
+  	<th>Email</th>
+  	<th>Department</th>
+  	<th>Designation</th>
+  	<th>Location</th>
+  </tr>
+<% employees.each do |employee| %>
+ <tr>
+  <td><%= employee.name%></td>
+  <td><%= employee.email_id%></td>
+  <td><%= employee.department%></td>
+  <td><%= employee.designation%></td>
+  <td><%= employee.location%></td>
+</tr>
+<% end%>
+</table>

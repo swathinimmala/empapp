@@ -1,0 +1,10 @@
+<%= form_tag(sort_employees_path, method: "get") do %>
+  <%= select_tag "operation", options_for_select(["order", "group"]), prompt: "choose"%>
+  <%= select_tag "criterion", options_for_select(option_generator), prompt: "choose"%>
+  <%= submit_tag "submit"%>
+<% end %>
+
+<% unless @employees.nil? %>
+  <%= params["operation"] %> by <%= params["criterion"]%>
+  <%= render "employees", :employees => @employees%>
+<% end %>

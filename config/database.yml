@@ -1,0 +1,7 @@
+development:
+  adapter: mysql2
+  database: emp_development
+  pool: 5
+  timeout: 5000
+  user: root
+  password: root
