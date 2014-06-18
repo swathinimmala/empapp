@@ -8,7 +8,7 @@ class EmployeesController < ApplicationController
   end
 
   def soft_delete
-  	if request.post?
+  	if request.post? && params["employees"].present?
   	  @employees = Employee.find(params["employees"])
   	  @employees.each do |employee|
   	    employee.soft_delete
