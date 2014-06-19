@@ -6,4 +6,5 @@
 <% unless @employees.nil? %>
   Order by <%= params["criterion"]%>
   <%= render "employees", :employees => @employees%>
+  <%= paginate @employees %>
 <% end %>

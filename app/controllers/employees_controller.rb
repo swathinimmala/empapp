@@ -1,10 +1,12 @@
 class EmployeesController < ApplicationController
+  PER_PAGE = 5
   def index
-  	@employees = Employee.all
+  	@employees = Employee.page(params[:page]).per(PER_PAGE)
   end
 
   def search
   	@employees = Employee.search(params["search_word"])
+    @employees = Kaminari.paginate_array(@employees).page(params[:page]).per(PER_PAGE)
   end
 
   def soft_delete
@@ -15,23 +17,19 @@ class EmployeesController < ApplicationController
   	  end
   	  redirect_to root_path, notice: "Soft deleted successfully"
   	end
-  	@employees = Employee.all
+  	@employees = Employee.page(params[:page]).per(PER_PAGE)
   end
 
   def sort
   	if params["criterion"].present?
-  	  @employees = Employee.order(params["criterion"])
+  	  @employees = Employee.order(params["criterion"]).page(params[:page]).per(PER_PAGE)
     end
   end
 
   def group
     if params["criterion"].present? 
-      @results = []
-      employees = Employee.all
-      employees = employees.group_by(&(params["criterion"].to_sym))
-      employees.each do |criterion, records|
-        @results << {:names => records.collect(&:name), :criterion => criterion}
-      end
+      @results = Employee.grouping(params["criterion"])
+      @results = Kaminari.paginate_array(@results).page(params[:page]).per(PER_PAGE)
   	end
   end
 end
